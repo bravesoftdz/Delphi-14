@@ -1,0 +1,29 @@
+//Tambem estou atualizando um campo memo.
+
+procedure TfrmCopiarArquivos.AddLog(pTexto: String);
+var
+  Handle    : TextFile;
+  DirFile : string;
+begin
+  {***Gravando no campo MEMO ***}
+  mLog.Lines.Add( pTexto );
+
+  {***Gravando no arquivo de LOG ***}
+  DirFile := ExtractFilePath(Application.ExeName) + 'Log\' + FormatDateTime('yyyymmdd',now) + '.log' ;
+  try
+
+    AssignFile(Handle, DirFile );
+
+    if NOT FileExists(DirFile) then
+      Rewrite(Handle);
+    Append(Handle);
+    Writeln(Handle, pTexto);
+  finally
+    CloseFile(Handle);
+  end;
+
+end;
+
+//Chamada 
+
+AddLog(sTime + ' Provavelmente já exite no diretório !'  );
