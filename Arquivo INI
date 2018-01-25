@@ -1,2 +1,32 @@
-//Criando arquivo INI
+//GRAVANDO ARQUIVO INI 
 
+// Gravação
+ArquivoINI := TIniFile.Create('C:\Configuracao.ini');
+ArquivoINI.WriteString('Valores', 'Mensagem', 'Este é um exemplo');
+ArquivoINI.WriteInteger('Valores', 'Contador', 5);
+ArquivoINI.WriteFloat('Valores', 'Preço', 12.56);
+ArquivoINI.WriteDate('Valores', 'Backup', '20/08/2012');
+ 
+// Leitura
+Edit.Text := ArquivoINI.ReadString('Informacoes', 'Usuario', '');
+RadioGroup.ItemIndex := ArquivoINI.ReadInteger('Informacoes', 'Opcao', 0);
+ 
+// Liberação da memória
+ArquivoINI.Free;
+
+
+
+//CARREGANDO ARQUIVO INI
+
+var
+  ArquivoINI: TIniFile;
+  Mensagem : string;
+begin
+  ArquivoINI := TIniFile.Create('C:\Configuracao.ini');
+  Mensagem := ArquivoINI.ReadString('Exemplo', 'Mensagem', 'Erro ao ler o valor');
+  ArquivoINI.Free;
+  ShowMessage('Mensagem armazenada no arquivo INI: ' + #13 + Mensagem);
+end;
+
+
+Fonte: http://www.andrecelestino.com/delphi-trabalhando-com-arquivos-ini/
