@@ -1,0 +1,2 @@
+#listando registros do banco formatado
+db.cursos.find().pretty()
